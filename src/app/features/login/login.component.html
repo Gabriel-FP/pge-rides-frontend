@@ -1,0 +1,63 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-info-panel">
+      <img src="brasao-ceara.png" alt="Brasão do Ceará" class="logo">
+      <h1>PGE-CE Rides</h1>
+      <p class="tagline">Simplified ride management system</p>
+
+      <ul class="feature-list">
+        <li>
+          <i class="pi pi-map-marker"></i>
+          <span>Request a ride in seconds</span>
+        </li>
+        <li>
+          <i class="pi pi-car"></i>
+          <span>Drivers accept rides in real time</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="login-form-panel">
+      <p-selectButton
+        [options]="roleOptions"
+        [ngModel]="selectedRole()"
+        (ngModelChange)="selectedRole.set($event)"
+        optionLabel="label"
+        optionValue="value"
+        [allowEmpty]="false"
+        styleClass="role-toggle">
+      </p-selectButton>
+
+      <div class="form-heading">
+        <i [class]="formIcon()"></i>
+        <div>
+          <h2>{{ formHeading() }}</h2>
+          <p class="subtext">{{ formSubtext() }}</p>
+        </div>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
+        <div class="form-field">
+          <label for="username">Username</label>
+          <input pInputText id="username" type="text" formControlName="username" placeholder="Enter your username">
+        </div>
+
+        <div class="form-field">
+          <label for="password">Password</label>
+          <p-password id="password" formControlName="password" placeholder="Enter your password" [toggleMask]="true"
+            [feedback]="false">
+          </p-password>
+          <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+
+        <p-button label="Sign in" [loading]="isLoading" [disabled]="form.invalid || isLoading" type="submit"
+          styleClass="w-full">
+        </p-button>
+      </form>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+</div>
